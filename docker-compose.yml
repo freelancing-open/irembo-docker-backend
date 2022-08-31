@@ -1,0 +1,66 @@
+version: "3.6"
+services:
+  ###### Postgres DB
+  postgres:
+    image: postgres:14.3
+    ports:
+      - "5500:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: irembo_db
+      
+  #### Postgres Admin View
+  postgres_admin:
+    image: dpage/pgadmin4:6
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - "9000:80"
+        
+  ########### Spring Boot Eureka Server
+  eureka-server-app:
+    container_name: eureka_server_app_service
+    image: eureka_server_app_image
+    build:
+      dockerfile: Dockerfile
+      context: ../discovery-server
+    ports:
+      - "8761:8761"
+      
+  ########### Spring Boot Main Service
+  irembo-app:
+    container_name: irembo_back_service
+    image: irembo_back_image
+    build:
+      dockerfile: Dockerfile
+      context: ../irembo-back
+    depends_on:
+      - postgres
+      - eureka-server-app
+      - email-app
+    environment:
+      DATABASE_URL: postgresql://postgres:5432/irembo_db
+      DATABASE_USER: user
+      DATABASE_PASSWORD: pass
+      EUREKA_DEFAULT_ZONE: http://eureka-server-app:8761/eureka
+    ports:
+      - "8090:8090"
+      
+  ########### Spring Boot Email Service
+  email-app:
+    container_name: email_app_service
+    image: email_app_image
+    build:
+      dockerfile: Dockerfile
+      context: ../email-microservice
+    depends_on:
+      - eureka-server-app
+    environment:
+      EUREKA_DEFAULT_ZONE: http://eureka-server-app:8761/eureka
+    ports:
+      - "30:30"
+ 
