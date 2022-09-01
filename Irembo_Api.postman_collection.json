@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "184c9dbe-811f-48dd-96ee-b7d3d478fedc",
+		"name": "Irembo Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17666684"
+	},
+	"item": [
+		{
+			"name": "Email Microservice",
+			"item": [
+				{
+					"name": "Send OTP Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jack.beryl@icloud.com\",\n    \"link\": null,\n    \"username\": null,\n    \"otp\": 25500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:30/email-microservice/api/v1/email-services/otp",
+							"host": [
+								"localhost"
+							],
+							"port": "30",
+							"path": [
+								"email-microservice",
+								"api",
+								"v1",
+								"email-services",
+								"otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verification Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jack.beryl@icloud.com\",\n    \"link\": \"https://irembo.gov.rw\",\n    \"username\": null,\n    \"otp\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:30/email-microservice/api/v1/email-services/verification",
+							"host": [
+								"localhost"
+							],
+							"port": "30",
+							"path": [
+								"email-microservice",
+								"api",
+								"v1",
+								"email-services",
+								"verification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"jack.beryl@icloud.com\",\n    \"link\": \"https://irembo.gov.rw\",\n    \"username\": \"Jack\",\n    \"otp\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:30/email-microservice/api/v1/email-services/reset",
+							"host": [
+								"localhost"
+							],
+							"port": "30",
+							"path": [
+								"email-microservice",
+								"api",
+								"v1",
+								"email-services",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Jack Beryl\",\n    \"lastName\": \"JB\",\n    \"email\": \"jack.beryl@icloud.com\",\n    \"pwd\": \"pass\",\n    \"gender\": \"M\",\n    \"dob\": \"2022-31-12\",\n    \"maritalStatus\": \"Single\",\n    \"nationality\": \"Rwanda\",\n    \"profilePic\": \"Images/java.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTk4NDgyNCwiaWF0IjoxNjYxOTgzOTI0fQ.-U9RAZkisLdzGrlWd739h075DmIrsXfcKJDmfHzaMdU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Roles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTk4NDY1MywiaWF0IjoxNjYxOTgzNzUzfQ.VEIRppc9nBSRV08VKDtHplWx36zX_GGIRjfqqAAhepk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTk4NDgyNCwiaWF0IjoxNjYxOTgzOTI0fQ.-U9RAZkisLdzGrlWd739h075DmIrsXfcKJDmfHzaMdU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/users/tester@admin.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"users",
+						"tester@admin.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jack.beryl@icloud.com\",\n    \"pwd\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password Link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/reset/jack.beryl@icloud.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"reset",
+						"jack.beryl@icloud.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registration Verification Link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/registration/verification/jack.beryl@icloud.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"registration",
+						"verification",
+						"jack.beryl@icloud.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multi Factor Authentication",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/mfa-verification/jack.beryl@icloud.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"mfa-verification",
+						"jack.beryl@icloud.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify OTP Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/mfa-verification/jack.beryl@icloud.com/71546",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"mfa-verification",
+						"jack.beryl@icloud.com",
+						"71546"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Registration Link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/irembo-back/api/v1/auth/registration/jack.beryl@icloud.com/verification?code=YNpId7QAJXX8lllfCwcPrqKYz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"registration",
+						"jack.beryl@icloud.com",
+						"verification"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "YNpId7QAJXX8lllfCwcPrqKYz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Reset Password Link",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/verify-reset?resetToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTkwOTI0NiwiaWF0IjoxNjYxOTA5MTI2fQ.LLvBlfHYyEweQGwULJcDqJXCfX76zspLcHQPEM2DFOE",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"verify-reset"
+					],
+					"query": [
+						{
+							"key": "resetToken",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTkwOTI0NiwiaWF0IjoxNjYxOTA5MTI2fQ.LLvBlfHYyEweQGwULJcDqJXCfX76zspLcHQPEM2DFOE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"pass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/auth/reset/jack.beryl@icloud.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"auth",
+						"reset",
+						"jack.beryl@icloud.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJpcmVtYm9BVSIsInN1YiI6ImphY2suYmVyeWxAaWNsb3VkLmNvbSIsImlzcyI6ImlyZW1ib0lTUyIsImV4cCI6MTY2MTk4NDg4MCwiaWF0IjoxNjYxOTgzOTgwfQ.1BsZTPRu5zivwjreAwjwQ71VHRhDK-V1f8oT04BsuCk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identification\": \"RW-014578\",\n    \"docLink\": \"Images/Tester/java.png\",\n    \"email\": \"tester@admin.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/irembo-back/api/v1/accounts/verify",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"irembo-back",
+						"api",
+						"v1",
+						"accounts",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
