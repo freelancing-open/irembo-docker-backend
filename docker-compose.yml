@@ -22,14 +22,43 @@ services:
       - "9000:80"
         
   ########### Spring Boot Eureka Server
-  eureka-server-app:
-    container_name: eureka_server_app_service
-    image: eureka_server_app_image
+  eureka-server:
+    container_name: eureka_server_service
+    image: eureka_server_image
     build:
       dockerfile: Dockerfile
       context: ../discovery-server
     ports:
-      - "8761:8761"
+      - "8760:8760"
+
+  ########## Spring Boot Config Server
+  config-server:
+    container_name: config_server_service
+    image: config_server_image
+    build:
+      dockerfile: Dockerfile
+      context: ../config-server
+    depends_on:
+      - eureka-server
+    environment:
+      EUREKA_DEFAULT_ZONE: http://eureka-server:8760/eureka
+    ports:
+      - "9090:9090"
+
+  ########## Spring Boot Api Gateway
+  api-gateway:
+    container_name: api_gateway_service
+    image: api_gateway_image
+    build:
+      dockerfile: Dockerfile
+      context: ../api-gateway
+    depends_on:
+      - config-server
+    environment:
+      EUREKA_DEFAULT_ZONE: http://eureka-server:8760/eureka
+      CONFIG_SERVER_ZONE: http://config-server:9090
+    ports:
+      - "9090:9090"
       
   ########### Spring Boot Main Service
   irembo-app:
@@ -40,13 +69,15 @@ services:
       context: ../irembo-back
     depends_on:
       - postgres
-      - eureka-server-app
+      - eureka-server
+      - config-server
       - email-app
     environment:
       DATABASE_URL: postgresql://postgres:5432/irembo_db
       DATABASE_USER: user
       DATABASE_PASSWORD: pass
-      EUREKA_DEFAULT_ZONE: http://eureka-server-app:8761/eureka
+      EUREKA_DEFAULT_ZONE: http://eureka-server:8760/eureka
+      CONFIG_SERVER_ZONE: http://config-server:9090
     ports:
       - "8090:8090"
       
@@ -58,9 +89,10 @@ services:
       dockerfile: Dockerfile
       context: ../email-microservice
     depends_on:
-      - eureka-server-app
+      - eureka-server
+      - config-server
     environment:
-      EUREKA_DEFAULT_ZONE: http://eureka-server-app:8761/eureka
+      EUREKA_DEFAULT_ZONE: http://eureka-server:8760/eureka
+      CONFIG_SERVER_ZONE: http://config-server:9090
     ports:
       - "30:30"
- 
